@@ -13,5 +13,4 @@ class ArtistImageApiService {
 
 val BASE_PARAMATERS_ARTIST:String = "pic.web?type=big_artist_pic&pictype=url&content=list&&id=0&from=pc&json=1&version=1&width=240&height=240"
 
-fun getArtistInfo:Observable<ArtistInfo>
-}
+fun getArtistInfo():Observable<ArtistInfo>{}
