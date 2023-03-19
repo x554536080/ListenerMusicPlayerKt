@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/include_list_viewpager"/>
+    <!--    有点懵逼 这个layout的名称什么意思-->
+    <include layout="@layout/include_list_viewpager" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"/>
+        android:fitsSystemWindows="true"
+        app:menu="@menu/drawer_view" />
+    <!--    哈 刚好就是没有添加menu-->
 
 </androidx.drawerlayout.widget.DrawerLayout>

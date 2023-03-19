@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -29,6 +30,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'com.kuma.listenermusicplayerkt'
 }
 
 dependencies {
@@ -48,7 +50,8 @@ dependencies {
 
     //butterknife
     implementation 'com.jakewharton:butterknife:10.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    kapt 'com.jakewharton:butterknife-compiler:10.0.0'
+    //todo note this https://www.bilibili.com/read/cv17935725/
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -56,4 +59,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.3.0'
     //slidinguppanel
     implementation 'com.sothree.slidinguppanel:library:3.3.1'
+    //app theme engine
+    implementation('com.github.naman14:app-theme-engine:0.5.2@aar') {
+        transitive = true
+    }
 }

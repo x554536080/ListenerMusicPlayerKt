@@ -5,6 +5,7 @@ import android.content.ServiceConnection
 import android.os.AsyncTask
 import android.os.IBinder
 import androidx.appcompat.app.AppCompatActivity
+import com.afollestad.appthemeengine.ATEActivity
 
 /**
  * name: BaseActivity
@@ -12,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
  * date: 2022/10/12 22:18
  * description:
  */
-class BaseActivity : AppCompatActivity(), ServiceConnection {
+open class BaseActivity : AppCompatActivity(), ServiceConnection {
 
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {

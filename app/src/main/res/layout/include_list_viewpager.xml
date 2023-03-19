@@ -4,7 +4,7 @@
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="bottom"
+    android:gravity="bottom"
     sothree:umanoDragView="@+id/quickcontrols_container"
     sothree:umanoPanelHeight="55dp"
     sothree:umanoShadowHeight="5dp"
