@@ -17,14 +17,24 @@
             <!--            这些style什么的还是不懂-->
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?colorPrimary"
+                android:paddingBottom="4dp"
+                app:tabMinWidth="80dp"
+                app:tabMaxWidth="85dp"
+                app:tabGravity="center"
+                app:tabIndicatorColor="#fff"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="#fff" />
+            <!--这个colorPrimary前面打个问号又是什么鬼-->
 
-                />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager.widget.ViewPager

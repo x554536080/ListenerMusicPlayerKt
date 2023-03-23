@@ -29,7 +29,7 @@ class MainActivity : BaseActivity() {
         navigationView!!.menu.findItem(R.id.nav_library).isChecked = true
         val fragment = MainFragment.newInstance(Constants.NAVIGATE_ALLSONG)
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container,fragment)
+        transaction.replace(R.id.fragment_container,fragment).commit()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

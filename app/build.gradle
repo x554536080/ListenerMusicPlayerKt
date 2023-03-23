@@ -57,6 +57,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.3.0'
+    //dagger2
+    implementation 'com.google.dagger:dagger:2.12'
+    //todo 还是没太懂这个annotationProcessor和compileOnly的用法原理以及为什么这里dagger需要用这个
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
+    compileOnly 'org.glassfish:java.annotaion:10.0-b28'
     //slidinguppanel
     implementation 'com.sothree.slidinguppanel:library:3.3.1'
     //app theme engine
