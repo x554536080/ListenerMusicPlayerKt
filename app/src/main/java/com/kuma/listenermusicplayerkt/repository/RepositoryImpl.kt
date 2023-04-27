@@ -15,7 +15,6 @@ import rx.Observable
  */
 abstract class RepositoryImpl(mContext: Context, artistImage: Retrofit) : Repository {
     lateinit var mArtistImageApiService: ArtistImageApiService
-
     init {
         mArtistImageApiService = artistImage.create(ArtistImageApiService::class.java)
     }

@@ -8,7 +8,7 @@ interface BasePresenter {
 
     fun attachView(baseView: BaseView)
 
-fun subscribe()
+    fun subscribe()
 
-fun unsubscribe()
+    fun unsubscribe()
 }

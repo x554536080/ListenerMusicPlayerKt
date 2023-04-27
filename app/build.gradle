@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+//    id 'kotlin-android-extensions' 这个对kotlin中使用dagger来说好像不是必要的，下面的kapt替代annotationProcessor才是最重要的
     id 'kotlin-kapt'
 }
 
@@ -60,8 +61,8 @@ dependencies {
     //dagger2
     implementation 'com.google.dagger:dagger:2.12'
     //todo 还是没太懂这个annotationProcessor和compileOnly的用法原理以及为什么这里dagger需要用这个
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
-    compileOnly 'org.glassfish:java.annotaion:10.0-b28'
+    kapt 'com.google.dagger:dagger-compiler:2.12'
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     //slidinguppanel
     implementation 'com.sothree.slidinguppanel:library:3.3.1'
     //app theme engine

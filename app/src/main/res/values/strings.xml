@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ListenerMusicPlayerKt</string>
     <string name="library">Library</string>
+
+    <string name="content_empty_default">Nothing here</string>
+
 </resources>

@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/sliding_up_header">
+
+    <!--    view stub用法还不太熟悉 子布局id必须和view stub id相同吗    -->
+    <ViewStub
+        android:id="@+id/view_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/layout_empty_view_default" />
+
+    <com.kuma.listenermusicplayerkt.widget.fastscroller.FastScrollRecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:fastScrollAutoHide="true"
+        app:fastScrollAutoHideDelay="1500"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:fastScrollPopupTextColor="@android:color/primary_text_dark" />
+    <!--这里又是@android 看吧-->
+    <!--    这个behavior也没懂，得天天写代码吧 这整天在搞毛-->
 
 </RelativeLayout>
