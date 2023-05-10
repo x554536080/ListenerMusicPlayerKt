@@ -5,6 +5,7 @@ import com.kuma.listenermusicplayerkt.ListenerApp
 import com.kuma.listenermusicplayerkt.mvp.contract.ArtistContract
 import com.kuma.listenermusicplayerkt.mvp.presenter.ArtistPresenter
 import com.kuma.listenermusicplayerkt.mvp.usecase.GetArtists
+import com.kuma.listenermusicplayerkt.repository.interfaces.Repository
 import dagger.Module
 import dagger.Provides
 
@@ -17,8 +18,8 @@ class ArtistModule {
     }
 
     @Provides
-    fun getArtistsUseCase(listenerApp: ListenerApp): GetArtists {
-        return GetArtists(listenerApp)
+    fun getArtistsUseCase(repository: Repository?): GetArtists {
+        return GetArtists(repository)//继续新代码 可以换成repository了
     }
 
 }

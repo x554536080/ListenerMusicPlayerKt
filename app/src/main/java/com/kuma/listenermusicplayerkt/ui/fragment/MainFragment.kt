@@ -30,6 +30,14 @@ class MainFragment : Fragment() {
     @BindView(R.id.viewpager)
     var viewPager: ViewPager? = null
 
+    private lateinit var action: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        action = arguments?.getString(Constants.PLAYLIST_TYPE)!!
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,7 +65,7 @@ class MainFragment : Fragment() {
     private fun setupViewPager(viewPager: ViewPager?) {
         val adapter = Adapter(childFragmentManager)
         adapter.addFragment(Fragment(), "歌曲")
-        adapter.addFragment(Fragment(), "歌手")
+        adapter.addFragment(ArtistFragment.newInstance(action), "歌手")
         adapter.addFragment(Fragment(), "专辑")
         viewPager!!.adapter = adapter
     }
@@ -88,7 +96,7 @@ class MainFragment : Fragment() {
             }
 
             override fun getItem(position: Int): Fragment {
-                return  fragments[position]
+                return fragments[position]
             }
 
             override fun getPageTitle(position: Int): CharSequence? {

@@ -6,16 +6,22 @@ import com.kuma.listenermusicplayerkt.mvp.view.BaseView
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class ArtistPresenter(val getArtists: GetArtists) : ArtistContract.Presenter {
+class ArtistPresenter(val mUsecase: GetArtists) : ArtistContract.Presenter {
 
-    private lateinit var mView: ArtistContract.View
+    private var mView: ArtistContract.View? = null
 
     override fun loadArtist(action: String) {
-        getArtists.execute(GetArtists.RequestValues(action))
+        mUsecase.execute(GetArtists.RequestValues(action))
             .getArtistList()!!
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {  }
+            .subscribe {
+                if (it == null || it.isEmpty()) {
+                    mView?.showEmptyView()
+                } else {
+                    mView?.showArtist(it)
+                }
+            }
     }
 
     override fun attachView(baseView: BaseView) {

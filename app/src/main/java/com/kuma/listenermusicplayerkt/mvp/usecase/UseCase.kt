@@ -1,6 +1,6 @@
 package com.kuma.listenermusicplayerkt.mvp.usecase
 
-abstract class UseCase<Q : UseCase.RequestValues, P : UseCase.RespondValues> {
+abstract class UseCase<Q : UseCase.RequestValues, P : UseCase.RespondValue> {
 
     private var mRequestValue: Q? = null
 
@@ -13,9 +13,9 @@ abstract class UseCase<Q : UseCase.RequestValues, P : UseCase.RespondValues> {
 //        return mRequestValue
 //    }
 
-    abstract fun execute(q: Q): P
+    abstract fun execute(requestValues: Q): P
 
     interface RequestValues
 
-    interface RespondValues//所以这两个接口有什么数据格式上的意义...其实就是模式上的设定吧
+    interface RespondValue//所以这两个接口有什么数据格式上的意义...其实就是模式上的设定吧
 }

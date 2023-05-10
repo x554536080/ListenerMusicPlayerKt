@@ -12,6 +12,6 @@ interface ArtistContract {
     }
 
     interface Presenter : BasePresenter {
-        fun loadArtist(string: String)
+        fun loadArtist(action: String)
     }
 }

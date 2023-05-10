@@ -13,7 +13,7 @@ import com.afollestad.appthemeengine.ATEActivity
  * date: 2022/10/12 22:18
  * description:
  */
-open class BaseActivity : ATEActivity(), ServiceConnection {
+open class BaseActivity : AppCompatActivity(), ServiceConnection {
 
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {

@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import butterknife.BindView
 import butterknife.ButterKnife
+import com.kuma.listenermusicplayerkt.Constants
 import com.kuma.listenermusicplayerkt.ListenerApp
 import com.kuma.listenermusicplayerkt.R
 import com.kuma.listenermusicplayerkt.injector.component.DaggerArtistComponent
@@ -14,6 +16,7 @@ import com.kuma.listenermusicplayerkt.injector.module.ArtistModule
 import com.kuma.listenermusicplayerkt.mvp.contract.ArtistContract
 import com.kuma.listenermusicplayerkt.mvp.module.Artist
 import com.kuma.listenermusicplayerkt.util.PreferencesUtility
+import com.kuma.listenermusicplayerkt.widget.fastscroller.FastScrollRecyclerView
 import javax.inject.Inject
 
 class ArtistFragment : Fragment(), ArtistContract.View {
@@ -22,17 +25,34 @@ class ArtistFragment : Fragment(), ArtistContract.View {
     @JvmField//有无其他解决办法？
     public var mPresenter: ArtistContract.Presenter? = null//声明类型写AP和AC.P有什么区别 和Dagger上
 
+    @BindView(R.id.recyclerview)
+    @JvmField
+    var recyclerView: FastScrollRecyclerView? = null
+
+    @BindView(R.id.view_empty)
+    @JvmField
+    var emptyView: View? = null
+
+private var mAdapter:Ada
+
     private var mPreferences: PreferencesUtility? = null
 
     private var layoutManager: GridLayoutManager? = null
 
     private var isGrid = false
+
+    private lateinit var action: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectDependencies()
+        mPresenter?.attachView(this)
         if (isGrid) {
         } else {
         }
+
+        action = arguments?.getString(Constants.PLAYLIST_TYPE)!!
+
+
     }
 
     private fun injectDependencies() {
@@ -58,14 +78,16 @@ class ArtistFragment : Fragment(), ArtistContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mPresenter?.loadArtist(action)
     }
 
+
     override fun showArtist(artists: List<Artist?>?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun showEmptyView() {
-        TODO("Not yet implemented")
+        emptyView?.visibility = View.VISIBLE
     }
 
     companion object {
@@ -73,7 +95,14 @@ class ArtistFragment : Fragment(), ArtistContract.View {
             //ignore bundle
             //ignore action judge
 
+
             val fragment = ArtistFragment()
+            val bundle = Bundle()
+            when (action) {
+                Constants.NAVIGATE_ALLSONG -> bundle.putString(Constants.PLAYLIST_TYPE, action)
+            }
+            fragment.arguments = bundle
+
             //
             return fragment
         }

@@ -1,6 +1,7 @@
 package com.kuma.listenermusicplayerkt.repository.interfaces
 
 import com.kuma.listenermusicplayerkt.api.model.ArtistInfo
+import com.kuma.listenermusicplayerkt.mvp.module.Artist
 import rx.Observable
 
 /**
@@ -11,7 +12,9 @@ import rx.Observable
  */
 interface Repository {
     //from network
-     fun getArtistInfo(artist: String): Observable<ArtistInfo>
+    fun getArtistInfo(artist: String): Observable<ArtistInfo>
 
     //from local
+
+    fun getAllArtists(): Observable<List<Artist>>
 }

@@ -24,5 +24,5 @@ interface ApplicationComponent {
 //
 //    fun application():Application
 
-//    fun repository(): Repository?
+    fun repository(): Repository?
 }
