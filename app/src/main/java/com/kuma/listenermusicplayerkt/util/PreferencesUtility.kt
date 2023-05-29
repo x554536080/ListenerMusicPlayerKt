@@ -6,6 +6,8 @@ import android.content.SharedPreferences
 class PreferencesUtility(val context: Context) {
 
     companion object {
+        private val ARTIST_ART_URL = "artist_at_url_"
+
         private var sInstance: PreferencesUtility? = null
 
         @Volatile
@@ -22,6 +24,12 @@ class PreferencesUtility(val context: Context) {
             return sInstance
         }
 
+    }
 
+
+    fun setArtistArt(artistId: Long, jsonString: String) {
+        val editor = mPreferences?.edit()
+        editor?.putString(ARTIST_ART_URL + artistId, jsonString)
+        editor?.apply()
     }
 }
