@@ -15,6 +15,7 @@ import com.kuma.listenermusicplayerkt.injector.component.DaggerArtistComponent
 import com.kuma.listenermusicplayerkt.injector.module.ArtistModule
 import com.kuma.listenermusicplayerkt.mvp.contract.ArtistContract
 import com.kuma.listenermusicplayerkt.mvp.module.Artist
+import com.kuma.listenermusicplayerkt.ui.adapter.ArtistAdapter
 import com.kuma.listenermusicplayerkt.util.PreferencesUtility
 import com.kuma.listenermusicplayerkt.widget.fastscroller.FastScrollRecyclerView
 import javax.inject.Inject
@@ -33,7 +34,8 @@ class ArtistFragment : Fragment(), ArtistContract.View {
     @JvmField
     var emptyView: View? = null
 
-private var mAdapter:Ada
+    private lateinit var mAdapter: ArtistAdapter
+    //之前把这一行注掉是干嘛...
 
     private var mPreferences: PreferencesUtility? = null
 
@@ -47,12 +49,14 @@ private var mAdapter:Ada
         injectDependencies()
         mPresenter?.attachView(this)
         if (isGrid) {
+            layoutManager = (GridLayoutManager(activity, 2))
         } else {
+            layoutManager = (GridLayoutManager(activity, 1))
         }
 
         action = arguments?.getString(Constants.PLAYLIST_TYPE)!!
 
-
+        mAdapter = ArtistAdapter(activity, action)
     }
 
     private fun injectDependencies() {
@@ -79,11 +83,15 @@ private var mAdapter:Ada
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mPresenter?.loadArtist(action)
+        recyclerView?.layoutManager = layoutManager
+        recyclerView?.adapter = mAdapter
     }
 
 
-    override fun showArtist(artists: List<Artist?>?) {
-
+    override fun showArtist(artists: List<Artist>) {
+        emptyView?.visibility = View.GONE
+        recyclerView?.visibility = View.VISIBLE
+        mAdapter.setArtistList(artists)
     }
 
     override fun showEmptyView() {

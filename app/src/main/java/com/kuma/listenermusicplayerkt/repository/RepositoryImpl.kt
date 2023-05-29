@@ -10,6 +10,7 @@ import com.kuma.listenermusicplayerkt.mvp.module.Artist
 import com.kuma.listenermusicplayerkt.repository.interfaces.Repository
 import retrofit2.Retrofit
 import rx.Observable
+import rx.Subscriber
 
 /**
  * name: RepositoryImpl
@@ -51,22 +52,24 @@ class RepositoryImpl(context: Context, artistImage: Retrofit, kugou: Retrofit, l
             MediaStore.Audio.Artists.DEFAULT_SORT_ORDER
         )
 
-        return Observable.create {
-            var arrayList: MutableList<Artist> = ArrayList()
-            if (cursor != null && cursor.moveToFirst())
-                do {
-                    arrayList.add(
-                        Artist(
-                            cursor.getInt(2),
-                            cursor.getLong(0),
-                            cursor.getString(1),
-                            cursor.getInt(3)
-                        )//要命了 原来的成员顺序和构造器参数顺序不同 btw 拷贝转的代码and me有什么问题...
-                    )
-                } while (cursor.moveToNext())
-            if (cursor != null) cursor.close()
-            it.onNext(arrayList)
+        return Observable.create(object : Observable.OnSubscribe<List<Artist>> {
+            override fun call(t: Subscriber<in List<Artist>>?) {
+                var arrayList: MutableList<Artist> = ArrayList()
+                if (cursor != null && cursor.moveToFirst())
+                    do {
+                        arrayList.add(
+                            Artist(
+                                cursor.getInt(2),
+                                cursor.getLong(0),
+                                cursor.getString(1),
+                                cursor.getInt(3)
+                            )//要命了 原来的成员顺序和构造器参数顺序不同 btw 拷贝转的代码and me有什么问题...
+                        )
+                    } while (cursor.moveToNext())
+                if (cursor != null) cursor.close()
+                t?.onNext(arrayList)
 //            it.onCompleted() 这行是不是可以没必要不要
-        }
+            }
+        })
     }
 }

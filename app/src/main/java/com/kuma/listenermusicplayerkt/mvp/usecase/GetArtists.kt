@@ -11,8 +11,13 @@ class GetArtists(val mRepository: Repository?) :
 
     override fun execute(requestValues: RequestValues): RespondValue {
         val action = requestValues.action
+
+
         when (action) {
-            Constants.NAVIGATE_ALLSONG -> mRepository.
+            Constants.NAVIGATE_ALLSONG ->
+                return RespondValue(mRepository?.getAllArtists())
+
+            else -> throw java.lang.RuntimeException("wrong action type")
 //                return RespondValues(Observable.create(object : Observable.OnSubscribe<List<Artist>> {
 //                    override fun call(t: Subscriber<in List<Artist>>?) {
 //                        val arrayList: List<Artist> = ArrayList()
@@ -32,9 +37,6 @@ class GetArtists(val mRepository: Repository?) :
 //                    )
 //                )
 //            )
-
-
-
 
         }
 
